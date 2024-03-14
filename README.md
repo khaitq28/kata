@@ -8,5 +8,7 @@ https://codingdojo.org/kata/movie-rental/
 2. Employee Report
 https://codingdojo.org/kata/Employee-Report/
 
+3. Tennis Game:
+https://codingdojo.org/kata/Tennis/
 
 ....
