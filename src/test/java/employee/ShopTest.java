@@ -19,7 +19,7 @@ class ShopTest {
     void getAdultEmployeeSorted() {
         shop.addEmployee(new Employee("xbc", 47));
         shop.addEmployee(new Employee("def", 27));
-        assertThat(shop.reportAdultEmployees(new AdultFilter())).isEqualTo("name | age\n" +
+        assertThat(shop.reportFilteredEmployees(new AdultFilter())).isEqualTo("name | age\n" +
                 "def | 27\n" +
                 "xbc | 47\n");
     }
@@ -29,7 +29,7 @@ class ShopTest {
         shop.addEmployee(new Employee("xbc", 47));
         shop.addEmployee(new Employee("def", 17));
         shop.addEmployee(new Employee("ab", 61));
-        assertThat(shop.reportAdultEmployees(new AdultFilter())).isEqualTo("name | age\n" +"xbc | 47\n");
+        assertThat(shop.reportFilteredEmployees(new AdultFilter())).isEqualTo("name | age\n" +"xbc | 47\n");
     }
 
     @Test
@@ -37,7 +37,7 @@ class ShopTest {
         shop.addEmployee(new Employee("xbc", 47));
         shop.addEmployee(new Employee("def", 17));
         shop.addEmployee(new Employee("ab", 61));
-        assertThat(shop.reportSeniorEmployees(new SeniorFilter())).isEqualTo("name | age\n" +"ab | 61\n");
+        assertThat(shop.reportFilteredEmployees(new SeniorFilter())).isEqualTo("name | age\n" +"ab | 61\n");
     }
 
 }

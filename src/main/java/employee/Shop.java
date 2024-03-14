@@ -22,10 +22,7 @@ public class Shop {
         return filter.filterEmployees(employees);
     }
 
-    public String reportAdultEmployees(EmployeeFilter filter) {
-        return reporter.getReport(filterEmployees(filter));
-    }
-    public String reportSeniorEmployees(EmployeeFilter filter) {
+    public String reportFilteredEmployees(EmployeeFilter filter) {
         return reporter.getReport(filterEmployees(filter));
     }
 }
