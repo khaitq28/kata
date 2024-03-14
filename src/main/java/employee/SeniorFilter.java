@@ -7,4 +7,9 @@ public class SeniorFilter extends EmployeeFilter {
     public Predicate<Employee> getPredicate() {
         return new SeniorEmployeePredicate();
     }
+
+    @Override
+    public SortOrder getSortOrder() {
+        return SortOrder.DESC;
+    }
 }

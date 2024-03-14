@@ -7,4 +7,9 @@ public class AdultFilter extends EmployeeFilter {
     public Predicate<Employee> getPredicate() {
         return new AdultEmployeePredicate();
     }
+
+    @Override
+    public SortOrder getSortOrder() {
+        return SortOrder.ASC;
+    }
 }
