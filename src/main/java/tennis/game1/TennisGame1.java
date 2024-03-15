@@ -3,8 +3,8 @@ package tennis.game1;
 
 import tennis.TennisGame;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class TennisGame1 implements TennisGame {
     
@@ -25,18 +25,21 @@ public class TennisGame1 implements TennisGame {
         throw new RuntimeException(name + " does not exists");
     }
     public String getScore() {
-        return allScore().stream()
-                .filter(new ScorePredicate())
-                .findFirst()
-                .get().statement();
+        return getScoreType().statement();
     }
 
-    private List<Score> allScore() {
-        return List.of(
-                new DeuceScore(player1,player2),
-                new AdvantageScore(player1, player2),
-                new EqualScore(player1, player2),
-                new NormalScore(player1, player2),
-                new WinScore(player1, player2));
+    private Score getScoreType() {
+
+        return Stream.of(
+                    new DeuceScore(player1,player2),
+                    new AdvantageScore(player1, player2),
+                    new EqualScore(player1, player2),
+                    new NormalScore(player1, player2),
+                    new WinScore(player1, player2))
+
+                .filter(new ScorePredicate())
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Not found type of score"));
     }
+
 }
