@@ -1,0 +1,90 @@
+﻿Welcome at the Kata, it is a small execrise based on the functioning of an retail shop.
+
+First of all, we will not ask you to implement an full retail shop and it's different behaviour. We need you to implement strictly the function we ask for.
+
+You can do whatever your want or think you should do to answer the questions (create elements, delete others, factorize, etc)
+in the "main" code. You're also free to import and use any library you want. **you must not modify the unit tests** unless the test is "manifestly wrong". If you doubt reading the instructions and the code (java), the instructions always right.
+
+However, you're also totally free to search anything usefull through the Internet.
+
+
+
+# Getting Started
+1. you're free to use whatever IDE you want, on this VM you'll find Eclipse Spring Tools
+   Suite, InteliJ IDEA, Notepad++, Git, GitBash, Maven, Java JDK 11, Powershell, CMD ;
+   - If you open Eclipse or InteliJ, you should find the project configured and working.
+   - If you choose an other editor, the sources are located at C:/Sources.
+2.  Assuming you has choose your IDE, first run all the unit test, they might fail.
+3.  You must send an email when you start the exam AND when you have committed you last code. This will be used to compute the time ;
+3.  At each steps, all the unit tests must pass ;
+4.  You must **create a commit** after each exercise (question, step) with the label `End exercise X` ;
+
+
+=========================================
+﻿
+***Supermaket***
+
+
+You are the manager of a supermarket which has just opened and which has everything in place to satisfy customers.
+Your role is to adjust the prices and stocks of each product and manage their arrangement on the shelves.
+
+
+**Step 1**
+
+"It would not be bad if we sold apples. Everyone likes apples. Eat apples !"
+
+The apple is an edible seed fruit with a sweet and tangy taste and with more or less astringent properties depending on the variety.
+- The apple stock started at 50
+- The price of an apple is 25
+- the most important: When there are no more apples, "No more apples available !!!" is displayed on the control screen (for this kata, it will be displayed on standard output)
+* Objective: Validate the SuperMarketStep1.java tests *
+* Estimated time: 10min *
+
+
+**2nd step**
+
+"People are a little tired of buying only apples. Let's sell pasta, pasta is good!"
+
+Pasta is food made from a mixture of flour, durum wheat semolina, spelt, buckwheat, rice or other types of cereals, water and sometimes eggs and salt.
+- We start with a stock of pasta at 75, it should be all the rage
+- The price of a package of dough is 50.
+- When there is no more pasta, "No more pastas available !!!" is displayed on the control screen
+* Objective: Validate the SuperMarketStep2.java tests *
+* Estimated time: 5min-10min *
+
+
+**Step 3**
+
+"We want to attack the luxury market, if we sell truffles too?"
+
+The truffle is a very popular mushroom in the kitchen, and a luxury product.
+- We ordered a little less, 30 truffles
+- The truffle is sold 30
+- When there is no more truffle, "No more truffles available !!!" is displayed on the control screen
+* Objective: Validate the SuperMarketStep3.java tests *
+* Estimated time: 5min-10min *
+
+
+**Step 4**
+
+"We need to build new shelves. Where are our workers?"
+
+The shelves are important in a supermarket. They all have their own utility, their size, their function. They are built by a highly qualified worker.
+This step does not deal with workers. Just implement a Factory in the `Builder` class.
+* Objective: Validate the SuperMarketStep4.java tests *
+* Estimated time: 10min *
+
+
+**Step 5**
+
+"Chef, our prices are too expensive!
+But I told to do specials offers... "
+
+We must be able to apply a voucher on the price of a product !!
+For this step, there will be no pre-established tests. You are entirely free:
+- Add the management of a `normal-voucher` for the apple, which if present, reduces the price by 2, only when the customer pays.
+- Add the management of a `super-voucher` for the apple, which if present, reduces the price by 50%, only when the customer pays.
+- Bonus: make this special offer mechanism work for the pasta and truffles too.
+
+* Objective: Define the SuperMarketStep5.java tests and validate them *
+* Estimated time: 5min-10min *
