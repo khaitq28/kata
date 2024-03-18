@@ -10,9 +10,12 @@ public class TennisGame1 implements TennisGame {
     
     private final Player player1;
     private final Player player2;
+    private final GameState state;
+
     public TennisGame1(String player1Name, String player2Name) {
        player1 = new Player(player1Name);
        player2 = new Player(player2Name);
+       state = new GameState(player1, player2);
     }
 
     public void wonPoint(String playerName) {
@@ -25,21 +28,8 @@ public class TennisGame1 implements TennisGame {
         throw new RuntimeException(name + " does not exists");
     }
     public String getScore() {
-        return getScoreType().statement();
+        return state.getScore().statement();
     }
 
-    private Score getScoreType() {
-
-        return Stream.of(
-                    new DeuceScore(player1,player2),
-                    new AdvantageScore(player1, player2),
-                    new EqualScore(player1, player2),
-                    new NormalScore(player1, player2),
-                    new WinScore(player1, player2))
-
-                .filter(new ScorePredicate())
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Not found type of score"));
-    }
 
 }
