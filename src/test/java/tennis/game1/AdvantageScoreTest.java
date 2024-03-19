@@ -18,7 +18,34 @@ public class AdvantageScoreTest {
     }
 
     @Test
-    public void statement() {
+    public void isNotApply1(){
+        p1.addScore();p1.addScore();p1.addScore();
+        assertFalse(score.isApply());
+    }
+    @Test
+    public void isNotApply2(){
+        assertFalse(score.isApply());
+    }
 
+    @Test
+    public void isNotApply3(){
+        p1.addScore();p1.addScore();p1.addScore();
+        p2.addScore();p2.addScore();p2.addScore();
+        p1.addScore();p1.addScore();p1.addScore();
+        assertFalse(score.isApply());
+    }
+
+    @Test
+    public void statementAdvantageForPlayer1() {
+        p1.addScore();p1.addScore();p1.addScore();p1.addScore();
+        p2.addScore();p2.addScore();p2.addScore();
+        assertEquals("Advantage player1", score.statement());
+    }
+
+    @Test
+    public void statementAdvantageForPlayer2() {
+        p1.addScore();p1.addScore();p1.addScore();
+        p2.addScore();p2.addScore();p2.addScore();p2.addScore();
+        assertEquals("Advantage player2", score.statement());
     }
 }
