@@ -1,5 +1,6 @@
 package ScoreKeeper;
 
+import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -61,5 +62,22 @@ class ScoreKeeperTest {
         scoreKeeper.scoreTeamB1();
         scoreKeeper.scoreTeamB3();
         assertEquals("003:004", scoreKeeper.getScore());
+    }
+    private final EasyRandom random = new EasyRandom();
+    @Test
+    void testGetScoreTeamATeamB() {
+        int i = random.nextInt(10,20);
+        int j = random.nextInt(10,20);
+        int scoreA = i * 2;
+        int scoreB = j * 3;
+        while (i > 0) {
+            scoreKeeper.scoreTeamA2();
+            i--;
+        }
+        while (j > 0) {
+            scoreKeeper.scoreTeamB3();
+            j--;
+        }
+        assertEquals("0"+scoreA + ":" +"0" + scoreB, scoreKeeper.getScore());
     }
 }
