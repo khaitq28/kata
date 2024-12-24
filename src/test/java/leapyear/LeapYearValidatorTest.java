@@ -1,7 +1,6 @@
 package leapyear;
 
-import net.jqwik.api.ForAll;
-import net.jqwik.api.Property;
+import net.jqwik.api.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -56,9 +55,14 @@ class LeapYearValidatorTest {
         assertEquals(expected, validator.isLeapYear(year));
     }
 
-//    @Property
-//    void testLeapYear(@ForAll("validYears") int year) {
-//        boolean expected = (year > 0 && ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)));
-//        assertEquals(expected, validator.isLeapYear(year));
-//    }
+    @Property(tries = 300)
+    void testLeapYear(@ForAll("validYears") int year) {
+        boolean expected = (year > 0 && ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)));
+        assertEquals(expected, validator.isLeapYear(year));
+    }
+
+    @Provide
+    Arbitrary<Integer> validYears() {
+        return Arbitraries.integers().between(1, 10000);
+    }
 }
