@@ -56,13 +56,24 @@ class LeapYearValidatorTest {
     }
 
     @Property(tries = 300)
-    void testLeapYear(@ForAll("validYears") int year) {
+    void testLeapYearValid(@ForAll("inputYears") int year) {
         boolean expected = (year > 0 && ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)));
         assertEquals(expected, validator.isLeapYear(year));
     }
 
+    @Property(tries = 300)
+    void testLeapYearInvalid(@ForAll("inputInvalidYears") int year) {
+        boolean expected = (year <0 || ((year % 400 != 0) && (year % 4 != 0 || year % 100 == 0)));
+        assertEquals(expected, !validator.isLeapYear(year));
+    }
+
     @Provide
-    Arbitrary<Integer> validYears() {
-        return Arbitraries.integers().between(1, 10000);
+    Arbitrary<Integer> inputYears() {
+        return Arbitraries.integers().between(1, 30000);
+    }
+
+    @Provide
+    Arbitrary<Integer> inputInvalidYears() {
+        return Arbitraries.integers().between(-1000, 30000);
     }
 }
