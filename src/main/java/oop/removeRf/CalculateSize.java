@@ -17,9 +17,19 @@ public class CalculateSize {
                 if (fileApi.isDirectory(cur)) {
                     st.add(sub);
                 } else {
-                    ret += fileApi.getSize(sub);
+                    ret += fileApi.getFileSize(sub);
                 }
             }
+        }
+        return ret;
+    }
+
+    public int getSizeRe(String path) {
+        if (fileApi.isDirectory(path) && !fileApi.isDirectory(path))
+            return fileApi.getFileSize(path);
+        int ret = 0;
+        for(String subPath: fileApi.GetAllFiles(path)){
+            ret += getSizeRe(subPath);
         }
         return ret;
     }

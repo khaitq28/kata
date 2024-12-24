@@ -11,7 +11,7 @@ public class RmRfApi {
 
     //Implement rm -rf: remove all file + sub directory
     public void deleteAllFilesAndDir(String path) {
-        List<String> list =fileApi.GetAllFiles(path);
+        List<String> list = fileApi.GetAllFiles(path);
         List<String> files = new ArrayList<>();
         List<String> subs = new ArrayList<>();
         for (String sub: list) {
@@ -44,7 +44,4 @@ public class RmRfApi {
         }
         fileApi.delete(path);
     }
-    // a -> b -> c
-
- // a ->  b (f3), f1 ,f2
 }
