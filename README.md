@@ -1,6 +1,6 @@
 Kata is amazing and best way to improve your coding, refactoring, design skills ! 
 
-Here are some of my solutions to kata exercises, mostly from https://codingdojo.org:
+Here are some of my solutions to kata exercises, mostly from https://codingdojo.org, and https://kata-log.rocks/
 
 1. Movie Rental 
 https://codingdojo.org/kata/movie-rental/
@@ -10,9 +10,15 @@ https://codingdojo.org/kata/Employee-Report/
 
 3. Tennis Game:
 https://codingdojo.org/kata/Tennis/
-
+4. Social network
+5. Task List 
+6. Leap Year
+7. Manhattan Distance
+8. Trip Service
+9. Score keeper
 ....
 
+and some from https://kata-log.rocks/
 
 And some question for System design interview :
 
