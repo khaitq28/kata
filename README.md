@@ -16,6 +16,8 @@ https://codingdojo.org/kata/Tennis/
 7. Manhattan Distance
 8. Trip Service
 9. Score keeper
+10. Tell Don't Ask Kata: https://kata-log.rocks/tell-dont-ask-kata
+
 ....
 
 and some from https://kata-log.rocks/
