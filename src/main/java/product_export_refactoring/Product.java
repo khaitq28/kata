@@ -1,9 +1,14 @@
 package product_export_refactoring;
 
+import lombok.Getter;
+
 public class Product {
 
+    @Getter
     protected final String name;
+    @Getter
     protected final String id;
+    @Getter
     protected final int weight;
     protected final Price price;
 
@@ -18,21 +23,9 @@ public class Product {
         throw new UnsupportedOperationException("missing from this exercise - shouldn't be called from a unit test");
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
     @Override
     public String toString() {
         return "Product{" + name + '}';
-    }
-
-    public int getWeight() {
-        return weight;
     }
 
     public double getPriceInUSD() {

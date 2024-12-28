@@ -1,5 +1,7 @@
 package product_export_refactoring;
 
+import lombok.Getter;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -11,8 +13,10 @@ import java.util.Date;
 public class Order {
 
     private final String id;
+    @Getter
     private final Date date;
     private final Collection<Product> products = new ArrayList<>();
+    @Getter
     private final Store store;
 
     public Order(String id, Date date, Store store, Product[] products) {
@@ -45,16 +49,8 @@ public class Order {
         return Collections.unmodifiableCollection(products);
     }
 
-    public Date getDate() {
-        return date;
-    }
-
     public void addProducts(Product... products) {
         this.products.addAll(Arrays.asList(products));
-    }
-
-    public Store getStore() {
-        return store;
     }
 
     private boolean isBeforeFirst2018() {

@@ -17,8 +17,7 @@ public class Util {
         try {
             return df.parse(datetime);
         } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
+            throw new IllegalArgumentException(datetime + " is not formatted for Date ISO");
         }
     }
 

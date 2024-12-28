@@ -1,5 +1,7 @@
 package product_export_refactoring;
 
+import lombok.Getter;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,7 +14,9 @@ import java.util.Map;
 public class Store {
 
     private final Map<String, Product> itemsInStock = new HashMap<>();
+    @Getter
     private final String name;
+    @Getter
     private final String id;
 
     public Store(String name, String id, Product[] products) {
@@ -39,10 +43,6 @@ public class Store {
         return itemsInStock.get(name);
     }
 
-    public String getId() {
-        return id;
-    }
-
     @Override
     public String toString() {
         return "Store{" + name + '}';
@@ -50,10 +50,6 @@ public class Store {
 
     public void saveToDatabase() {
         throw new UnsupportedOperationException("missing from this exercise - shouldn't be called from a unit test");
-    }
-
-    public String getName() {
-        return name;
     }
 
     public Collection<Product> getStock() {
