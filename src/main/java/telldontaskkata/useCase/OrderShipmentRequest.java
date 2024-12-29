@@ -1,13 +1,10 @@
 package telldontaskkata.useCase;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class OrderShipmentRequest {
     private int orderId;
-
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
-
-    public int getOrderId() {
-        return orderId;
-    }
 }

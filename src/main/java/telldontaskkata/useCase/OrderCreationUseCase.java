@@ -36,23 +36,23 @@ public class OrderCreationUseCase {
             if (product == null) {
                 throw new UnknownProductException();
             }
-            else {
-                final BigDecimal unitaryTax = product.getPrice().divide(valueOf(100)).multiply(product.getCategory().getTaxPercentage()).setScale(2, HALF_UP);
-                final BigDecimal unitaryTaxedAmount = product.getPrice().add(unitaryTax).setScale(2, HALF_UP);
-                final BigDecimal taxedAmount = unitaryTaxedAmount.multiply(valueOf(itemRequest.getQuantity())).setScale(2, HALF_UP);
-                final BigDecimal taxAmount = unitaryTax.multiply(valueOf(itemRequest.getQuantity()));
+            final BigDecimal unitaryTax = product.getUnitaryTax();
 
-                final OrderItem orderItem = OrderItem.builder()
-                        .product(product).quantity(itemRequest.getQuantity())
-                        .tax(taxAmount)
-                        .taxedAmount(taxedAmount)
-                        .build();
+            final BigDecimal unitaryTaxedAmount = product.getPrice().add(unitaryTax).setScale(2, HALF_UP);
+            final BigDecimal taxedAmount = unitaryTaxedAmount.multiply(valueOf(itemRequest.getQuantity())).setScale(2, HALF_UP);
+            final BigDecimal taxAmount = unitaryTax.multiply(valueOf(itemRequest.getQuantity()));
 
-                order.getItems().add(orderItem);
+            final OrderItem orderItem = OrderItem.builder()
+                    .product(product)
+                    .quantity(itemRequest.getQuantity())
+                    .tax(taxAmount)
+                    .taxedAmount(taxedAmount)
+                    .build();
 
-                order.setTotal(order.getTotal().add(taxedAmount));
-                order.setTax(order.getTax().add(taxAmount));
-            }
+            order.getItems().add(orderItem);
+
+            order.setTotal(order.getTotal().add(taxedAmount));
+            order.setTax(order.getTax().add(taxAmount));
         }
 
         orderRepository.save(order);
