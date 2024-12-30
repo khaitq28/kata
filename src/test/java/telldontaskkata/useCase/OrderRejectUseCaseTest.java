@@ -15,7 +15,6 @@ class OrderRejectUseCaseTest {
     @Test
     void rejectedExistingOrder() {
         Order initialOrder = new Order();
-        initialOrder.setStatus(OrderStatus.CREATED);
         initialOrder.setId(1);
         orderRepository.addOrder(initialOrder);
 

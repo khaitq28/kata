@@ -5,7 +5,9 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class OrderApprovalRequest {
-    private int orderId;
-    private boolean approved;
+public class OrderApprovalRequest extends OrderRequest {
+
+    public OrderApprovalRequest(int orderId) {
+        super(orderId);
+    }
 }
