@@ -1,25 +1,24 @@
 package telldontaskkata.useCase;
 
 import lombok.AllArgsConstructor;
-import telldontaskkata.repository.OrderRepository;
 import telldontaskkata.domain.Order;
 import telldontaskkata.domain.OrderStatus;
+import telldontaskkata.repository.OrderRepository;
 
 @AllArgsConstructor
-public class OrderApprovalUseCase {
+public class OrderRejectUseCase {
+
     private final OrderRepository orderRepository;
-
-    public void run(OrderApprovalRequest request) {
-
+    public void run(OrderRejectRequest request) {
         final Order order = orderRepository.getById(request.getOrderId());
 
         if (order.isShipped()) {
             throw new ShippedOrdersCannotBeChangedException();
         }
-        if (order.isRejected()) {
-            throw new RejectedOrderCannotBeApprovedException();
+        if (order.isApproval()) {
+            throw new ApprovedOrderCannotBeRejectedException();
         }
-        order.setStatus(OrderStatus.APPROVED);
+        order.setStatus(OrderStatus.REJECTED);
         orderRepository.save(order);
     }
 }

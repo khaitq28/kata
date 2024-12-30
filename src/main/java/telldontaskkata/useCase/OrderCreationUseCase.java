@@ -19,16 +19,12 @@ public class OrderCreationUseCase {
     }
 
     public void run(SellItemsRequest request) {
+
         Order order = new Order();
-        order.setStatus(OrderStatus.CREATED);
-        order.setItems(new ArrayList<>());
         order.setCurrency("EUR");
 
         for (SellItemRequest itemRequest : request.getRequests()) {
-            Product product = productCatalog.getByName(itemRequest.getProductName());
-            if (product == null) {
-                throw new UnknownProductException();
-            }
+            Product product = productCatalog.getByName(itemRequest.getProductName()).orElseThrow(UnknownProductException::new);
             final OrderItem orderItem = new OrderItem(product, itemRequest.getQuantity());
             order.addOrderItem(orderItem);
         }

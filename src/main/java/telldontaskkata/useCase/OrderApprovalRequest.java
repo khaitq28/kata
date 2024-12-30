@@ -8,5 +8,4 @@ import lombok.Setter;
 public class OrderApprovalRequest {
     private int orderId;
     private boolean approved;
-
 }

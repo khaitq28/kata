@@ -19,12 +19,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class OrderCreationUseCaseTest {
     private final TestOrderRepository orderRepository = new TestOrderRepository();
-    private Category food = new Category() {{
+    private final Category food = new Category() {{
         setName("food");
         setTaxPercentage(new BigDecimal("10"));
     }};;
     private final ProductCatalog productCatalog = new InMemoryProductCatalog(
-            Arrays.<Product>asList(
+            Arrays.asList(
                     new Product() {{
                         setName("salad");
                         setPrice(new BigDecimal("3.56"));
@@ -75,7 +75,7 @@ class OrderCreationUseCaseTest {
     }
 
     @Test
-    public void unknownProduct() throws Exception {
+    void unknownProduct() {
         SellItemsRequest request = new SellItemsRequest();
         request.setRequests(new ArrayList<>());
         SellItemRequest unknownProductRequest = new SellItemRequest();

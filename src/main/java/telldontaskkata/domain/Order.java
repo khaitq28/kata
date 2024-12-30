@@ -8,13 +8,14 @@ import telldontaskkata.useCase.RejectedOrderCannotBeApprovedException;
 import telldontaskkata.useCase.ShippedOrdersCannotBeChangedException;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Setter
 @Getter
 public class Order {
-    private List<OrderItem> items;
+    private final List<OrderItem> items = new ArrayList<>();
 
     private String currency;
     private BigDecimal tax = new BigDecimal("0.00");
@@ -23,8 +24,9 @@ public class Order {
     private OrderStatus status;
     private int id;
 
-    private OrderState state;
-
+    public Order() {
+        this.status = OrderStatus.CREATED;
+    }
     public void addOrderItem(OrderItem orderItem) {
         this.items.add(orderItem);
         this.total = getTotal().add(orderItem.getTaxedAmount());
