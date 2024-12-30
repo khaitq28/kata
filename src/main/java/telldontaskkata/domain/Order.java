@@ -2,6 +2,7 @@ package telldontaskkata.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import telldontaskkata.domain.state.OrderState;
 import telldontaskkata.useCase.ApprovedOrderCannotBeRejectedException;
 import telldontaskkata.useCase.RejectedOrderCannotBeApprovedException;
 import telldontaskkata.useCase.ShippedOrdersCannotBeChangedException;
@@ -13,12 +14,22 @@ import java.util.List;
 @Setter
 @Getter
 public class Order {
-    private BigDecimal total;
-    private String currency;
     private List<OrderItem> items;
-    private BigDecimal tax;
+
+    private String currency;
+    private BigDecimal tax = new BigDecimal("0.00");
+    private BigDecimal total = new BigDecimal("0.00");
+
     private OrderStatus status;
     private int id;
+
+    private OrderState state;
+
+    public void addOrderItem(OrderItem orderItem) {
+        this.items.add(orderItem);
+        this.total = getTotal().add(orderItem.getTaxedAmount());
+        this.tax = getTax().add(orderItem.getTax());
+    }
 
     public boolean isShipped() {
         return this.status.equals(OrderStatus.SHIPPED);
