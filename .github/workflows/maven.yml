@@ -37,7 +37,7 @@ jobs:
   test-install:
     name: Run Tests
     runs-on: ubuntu-latest
-    neneeds: compile
+    needs: compile
     steps:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
