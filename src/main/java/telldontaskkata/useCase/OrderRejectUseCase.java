@@ -10,7 +10,7 @@ public class OrderRejectUseCase {
 
     private final OrderRepository orderRepository;
     public void run(OrderRejectRequest request) {
-        final Order order = orderRepository.getById(request.getOrderId());
+        final Order order = orderRepository.getById(request.getOrderId()).orElseThrow(OrderNotFoundException::new);
 
         if (order.isShipped()) {
             throw new ShippedOrdersCannotBeChangedException();

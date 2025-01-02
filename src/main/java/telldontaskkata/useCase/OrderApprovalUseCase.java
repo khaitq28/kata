@@ -11,7 +11,7 @@ public class OrderApprovalUseCase {
 
     public void run(OrderApprovalRequest request) {
 
-        final Order order = orderRepository.getById(request.getOrderId());
+        final Order order = orderRepository.getById(request.getOrderId()).orElseThrow(OrderNotFoundException::new);
 
         if (order.isShipped()) {
             throw new ShippedOrdersCannotBeChangedException();

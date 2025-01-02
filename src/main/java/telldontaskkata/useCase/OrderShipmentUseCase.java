@@ -19,7 +19,7 @@ public class OrderShipmentUseCase {
     }
 
     public void run(OrderShipmentRequest request) {
-        final Order order = orderRepository.getById(request.getOrderId());
+        final Order order = orderRepository.getById(request.getOrderId()).orElseThrow(OrderNotFoundException::new);
 
         if (order.getStatus().equals(CREATED) || order.getStatus().equals(REJECTED)) {
             throw new OrderCannotBeShippedException();

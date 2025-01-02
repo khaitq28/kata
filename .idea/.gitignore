@@ -8,3 +8,9 @@
 /dataSources.local.xml
 # GitHub Copilot persisted chat sessions
 /copilot/chatSessions
+/encodings.xml
+/sonarlint/issuestore/index.pb
+/sonarlint/securityhotspotstore/index.pb
+/misc.xml
+/uiDesigner.xml
+/vcs.xml
