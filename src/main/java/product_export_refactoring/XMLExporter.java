@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
 
 public class XMLExporter {
 
@@ -23,7 +24,11 @@ public class XMLExporter {
     }
 
     public static String exportTaxDetails(Collection<Order> orders) {
-        NumberFormat formatter = new DecimalFormat("#0.00");
+
+        NumberFormat formatter = NumberFormat.getInstance(Locale.US);
+        DecimalFormat decimalFormat = (DecimalFormat) formatter;
+        decimalFormat.applyPattern("#0.00");
+
         StringBuilder xml = new StringBuilder();
         xml.append(XML_VERSION);
         xml.append("<orderTax>");

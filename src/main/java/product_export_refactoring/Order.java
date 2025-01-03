@@ -4,11 +4,7 @@ import lombok.Getter;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
+import java.util.*;
 
 public class Order {
 
@@ -85,7 +81,9 @@ public class Order {
     }
 
     public String getExportWithTax() {
-        NumberFormat formatter = new DecimalFormat("#0.00");
+        NumberFormat formatter = NumberFormat.getInstance(Locale.US);
+        DecimalFormat decimalFormat = (DecimalFormat) formatter;
+        decimalFormat.applyPattern("#0.00");
         StringBuilder xml = new StringBuilder();
         xml.append("<order");
         xml.append(" date='");
