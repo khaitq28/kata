@@ -2,25 +2,25 @@ package org.codingdojo.yatzy1;
 
 public class Yatzy1 {
 
-    public static int chance(int d1, int d2, int d3, int d4, int d5)
-    {
+    public static int chance(int... dice) {
         int total = 0;
-        total += d1;
-        total += d2;
-        total += d3;
-        total += d4;
-        total += d5;
+        for(int i: dice)
+            total += i;
         return total;
     }
 
-    public static int yatzy(int... dice)
-    {
+    public static int yatzy(int... positions) {
         int[] counts = new int[6];
-        for (int die : dice)
-            counts[die-1]++;
-        for (int i = 0; i != 6; i++)
-            if (counts[i] == 5)
+        for (int position : positions) {
+            int index = position-1;
+            if (index < 0 || index >= counts.length)
+                throw new IllegalArgumentException("Die value out of range");
+            counts[index]++;
+        }
+        for (int count : counts) {
+            if (count == 5)
                 return 50;
+        }
         return 0;
     }
 
