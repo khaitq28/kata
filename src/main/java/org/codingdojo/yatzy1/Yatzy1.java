@@ -1,15 +1,11 @@
 package org.codingdojo.yatzy1;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 public class Yatzy1 {
 
     public static int chance(int... dice) {
-        int total = 0;
-        for(int i: dice)
-            total += i;
-        return total;
+        return Arrays.stream(dice).sum();
     }
 
     public static int yatzy(int... positions) {
@@ -56,15 +52,15 @@ public class Yatzy1 {
     }
 
     public int fours() {
-        return Arrays.stream(dice).filter(d -> d == 4).sum();
+        return filterAndSum(4, dice);
     }
 
     public int fives() {
-        return Arrays.stream(dice).filter(d -> d == 5).sum();
+        return filterAndSum(5, dice);
     }
 
     public int sixes() {
-        return Arrays.stream(dice).filter(d -> d == 6).sum();
+        return filterAndSum(6, dice);
     }
 
     public int score_pair(int d1, int d2, int d3, int d4, int d5) {
