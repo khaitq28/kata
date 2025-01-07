@@ -1,6 +1,7 @@
 package org.codingdojo.yatzy1;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class Yatzy1 {
 
@@ -44,60 +45,39 @@ public class Yatzy1 {
 
     protected int[] dice;
     public Yatzy1() {}
-    public Yatzy1(int d1, int d2, int d3, int d4, int _5)
-    {
-        this();
+    public Yatzy1(int... arr) {
+        if (arr.length != 5)
+            throw new IllegalArgumentException("You must input exactly 5 dice");
         dice = new int[5];
-        dice[0] = d1;
-        dice[1] = d2;
-        dice[2] = d3;
-        dice[3] = d4;
-        dice[4] = _5;
-    }
-
-    public int fours()
-    {
-        int sum;    
-        sum = 0;
-        for (int at = 0; at != 5; at++) {
-            if (dice[at] == 4) {
-                sum += 4;
-            }
+        int j = 0;
+        for(int i: arr) {
+            dice[j++] = i;
         }
-        return sum;
     }
 
-    public int fives()
-    {
-        int s = 0;
-        int i;
-        for (i = 0; i < dice.length; i++) 
-            if (dice[i] == 5)
-                s = s + 5;
-        return s;
+    public int fours() {
+        return Arrays.stream(dice).filter(d -> d == 4).sum();
     }
 
-    public int sixes()
-    {
-        int sum = 0;
-        for (int at = 0; at < dice.length; at++) 
-            if (dice[at] == 6)
-                sum = sum + 6;
-        return sum;
+    public int fives() {
+        return Arrays.stream(dice).filter(d -> d == 5).sum();
     }
 
-    public int score_pair(int d1, int d2, int d3, int d4, int d5)
-    {
+    public int sixes() {
+        return Arrays.stream(dice).filter(d -> d == 6).sum();
+    }
+
+    public int score_pair(int d1, int d2, int d3, int d4, int d5) {
         int[] counts = new int[6];
         counts[d1-1]++;
         counts[d2-1]++;
         counts[d3-1]++;
         counts[d4-1]++;
         counts[d5-1]++;
-        int at;
-        for (at = 0; at != 6; at++)
-            if (counts[6-at-1] >= 2)
-                return (6-at)*2;
+        int i;
+        for (i = 0; i < counts.length; i++)
+            if (counts[5 - i] >= 2)
+                return (6-i)*2;
         return 0;
     }
 
