@@ -2,25 +2,25 @@ package org.codingdojo.yatzy1;
 
 import java.util.Arrays;
 
+import static java.util.Arrays.stream;
+
 public class Yatzy1 {
 
     public static int chance(int... dice) {
-        return Arrays.stream(dice).sum();
+        return stream(dice).sum();
     }
 
     public static int yatzy(int... positions) {
-        int[] counts = new int[6];
+        stream(positions).filter(p -> p <= 0).findAny().ifPresent(p -> {
+            throw new IllegalArgumentException("Dice value must be greater than 0");
+        });
+        int max = stream(positions).max().orElse(0);
+        int[] counts = new int[max];
         for (int position : positions) {
             int index = position-1;
-            if (index < 0 || index >= counts.length)
-                throw new IllegalArgumentException("Die value out of range");
             counts[index]++;
         }
-        for (int count : counts) {
-            if (count == 5)
-                return 50;
-        }
-        return 0;
+        return Arrays.stream(counts).filter(p -> p == 5).findAny().isEmpty() ? 0 : 50;
     }
 
     public static int ones(int...dices) {
@@ -32,7 +32,7 @@ public class Yatzy1 {
     }
 
     private static int filterAndSum(int value, int... dices) {
-        return Arrays.stream(dices).filter(dice -> dice == value).sum();
+        return (int) (stream(dices).filter(dice -> dice == value).count() * value);
     }
 
     public static int threes(int... dices) {
@@ -42,9 +42,7 @@ public class Yatzy1 {
     protected int[] dice;
     public Yatzy1() {}
     public Yatzy1(int... arr) {
-        if (arr.length != 5)
-            throw new IllegalArgumentException("You must input exactly 5 dice");
-        dice = new int[5];
+        dice = new int[arr.length];
         int j = 0;
         for(int i: arr) {
             dice[j++] = i;
@@ -63,28 +61,25 @@ public class Yatzy1 {
         return filterAndSum(6, dice);
     }
 
-    public int score_pair(int d1, int d2, int d3, int d4, int d5) {
+    public int score_pair(int... args) {
         int[] counts = new int[6];
-        counts[d1-1]++;
-        counts[d2-1]++;
-        counts[d3-1]++;
-        counts[d4-1]++;
-        counts[d5-1]++;
-        int i;
-        for (i = 0; i < counts.length; i++)
-            if (counts[5 - i] >= 2)
-                return (6-i)*2;
+        for (int arg : args) {
+            int index = arg-1;
+            counts[index]++;
+        }
+        for (int i = counts.length -1; i >= 0; i--)
+            if (counts[i] >= 2)
+                return (i+1)*2;
         return 0;
     }
 
-    public static int two_pair(int d1, int d2, int d3, int d4, int d5)
+    public static int two_pair(int... args)
     {
         int[] counts = new int[6];
-        counts[d1-1]++;
-        counts[d2-1]++;
-        counts[d3-1]++;
-        counts[d4-1]++;
-        counts[d5-1]++;
+        for (int arg : args) {
+            int index = arg-1;
+            counts[index]++;
+        }
         int n = 0;
         int score = 0;
         for (int i = 0; i < 6; i += 1)
