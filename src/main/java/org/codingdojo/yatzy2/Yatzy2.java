@@ -6,8 +6,7 @@ import org.codingdojo.YatzyCategory;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Yatzy2 implements YatzyCalculator {
     static final List<Integer> DICE_VALUES = Arrays.asList(6, 5, 4, 3, 2, 1);
@@ -15,9 +14,21 @@ public class Yatzy2 implements YatzyCalculator {
 
     @Override
     public List<String> validCategories() {
-        return Arrays.stream(YatzyCategory.values()).map(Enum::toString).collect(Collectors.toList());
+        return Stream.of(YatzyCategory.values()).map(Enum::toString).toList();
     }
 
+    private int calcul(HashMap<Integer, Integer> diceFrequencies, int frequency) {
+        for (int i : DICE_VALUES) {
+            if (diceFrequencies.getOrDefault(i, Integer.MIN_VALUE) >= frequency) {
+                return i * frequency;
+            }
+        }
+        return 0;
+    }
+
+    private int sumItemsWithFre(HashMap<Integer, Integer> diceFrequencies, int value) {
+        return  diceFrequencies.getOrDefault(value,0) * value;
+    }
     @Override
     public int score(List<Integer> dice, String categoryName) {
         YatzyCategory category = YatzyCategory.valueOf(categoryName);
@@ -40,50 +51,32 @@ public class Yatzy2 implements YatzyCalculator {
                 return (diceFrequencies.containsValue(5)) ? 50: 0;
             case ONES:
                 // sum all the ones
-                return diceFrequencies.get(1);
+                return sumItemsWithFre(diceFrequencies, 1);
             case TWOS:
                 // sum all the twos
-                return diceFrequencies.get(2) * 2;
+                return sumItemsWithFre(diceFrequencies, 2);
             case THREES:
                 // sum all the threes
-                return diceFrequencies.get(3) * 3;
+                return sumItemsWithFre(diceFrequencies, 3);
             case FOURS:
                 // sum all the fours
-                return diceFrequencies.get(4) * 4;
+                return sumItemsWithFre(diceFrequencies, 4);
             case FIVES:
                 // sum all the fives
-                return diceFrequencies.get(5) * 5;
+                return sumItemsWithFre(diceFrequencies, 5);
             case SIXES:
                 // sum all the sixes
-                return diceFrequencies.get(6) * 6;
+                return sumItemsWithFre(diceFrequencies, 6);
             case PAIR:
                 // score pair if two dice are the same
                 // score highest pair if there is more than one
-                for (int i : DICE_VALUES) {
-                    if (diceFrequencies.get(i) >= 2) {
-                        return  i * 2;
-                    }
-                }
-                return 0;
-
+                return calcul(diceFrequencies, 2);
             case THREE_OF_A_KIND:
                 // score if three dice are the same
-                for (int i : DICE_VALUES) {
-                    if (diceFrequencies.get(i) >= 3) {
-                        return i * 3;
-                    }
-                }
-                return 0;
-
+                return calcul(diceFrequencies, 3);
             case FOUR_OF_A_KIND:
                 // score if four dice are the same
-                for (int i : DICE_VALUES) {
-                    if (diceFrequencies.get(i) >= 4) {
-                        return i * 4;
-                    }
-                }
-                return 0;
-
+                return calcul(diceFrequencies, 4);
             case SMALL_STRAIGHT:
                 // score if dice contains 1,2,3,4,5
                 int smallStraightResult = 0;
@@ -93,7 +86,7 @@ public class Yatzy2 implements YatzyCalculator {
                         count++;
                     }
                 }
-                if (count == 5 && diceFrequencies.get(6) == 0) {
+                if (count == 5 && diceFrequencies.getOrDefault(6,0) == 0) {
                     for (Integer die : dice) {
                         smallStraightResult += die;
                     }
@@ -111,7 +104,7 @@ public class Yatzy2 implements YatzyCalculator {
                         straightCount++;
                     }
                 }
-                if (straightCount == 5 && diceFrequencies.get(1) == 0) {
+                if (straightCount == 5 && diceFrequencies.getOrDefault(1,0) == 0) {
                     for (Integer die : dice) {
                         largeStraightResult += die;
                     }
@@ -131,7 +124,7 @@ public class Yatzy2 implements YatzyCalculator {
                 }
                 if (pairCount == 2) {
                     for (int i : DICE_VALUES) {
-                        if (diceFrequencies.get(i) >= 2) {
+                        if (diceFrequencies.getOrDefault(i,0) >= 2) {
                             twoPairResult += i * 2;
                         }
                     }
