@@ -24,104 +24,67 @@ public class Yatzy2 implements YatzyCalculator {
 
         // calculate dice frequencies
         HashMap<Integer, Integer> diceFrequencies = new HashMap<>();
-        for (int i : DICE_VALUES) {
-            diceFrequencies.put(i, 0);
-        }
         for (int die : dice) {
-            diceFrequencies.put(die, diceFrequencies.get(die) + 1);
+            diceFrequencies.put(die, diceFrequencies.getOrDefault(die,0) + 1);
         }
 
         // calculate the score
         int result;
         switch (category) {
             case CHANCE:
-
                 // chance sums the dice
                 result = dice.stream().mapToInt(Integer::intValue).sum();
                 break;
-
             case YATZY:
-
                 // score for yatzy if all dice are the same
-                int yatzyResult = 0;
-                if (diceFrequencies.containsValue(5)) {
-                    yatzyResult = 50;
-                }
-                result = yatzyResult;
-                break;
-
+                return (diceFrequencies.containsValue(5)) ? 50: 0;
             case ONES:
                 // sum all the ones
-                result = diceFrequencies.get(1);
-                break;
-
+                return diceFrequencies.get(1);
             case TWOS:
                 // sum all the twos
-                result = diceFrequencies.get(2) * 2;
-                break;
-
+                return diceFrequencies.get(2) * 2;
             case THREES:
                 // sum all the threes
-                result = diceFrequencies.get(3) * 3;
-                break;
-
+                return diceFrequencies.get(3) * 3;
             case FOURS:
                 // sum all the fours
-                result = diceFrequencies.get(4) * 4;
-                break;
-
+                return diceFrequencies.get(4) * 4;
             case FIVES:
                 // sum all the fives
-                result = diceFrequencies.get(5) * 5;
-                break;
-
+                return diceFrequencies.get(5) * 5;
             case SIXES:
                 // sum all the sixes
-                result = diceFrequencies.get(6) * 6;
-                break;
-
+                return diceFrequencies.get(6) * 6;
             case PAIR:
-
                 // score pair if two dice are the same
-                int pairResult = 0;
                 // score highest pair if there is more than one
                 for (int i : DICE_VALUES) {
                     if (diceFrequencies.get(i) >= 2) {
-                        pairResult = i * 2;
-                        break;
+                        return  i * 2;
                     }
                 }
-                result = pairResult;
-                break;
+                return 0;
 
             case THREE_OF_A_KIND:
-
                 // score if three dice are the same
-                int threeKindResult = 0;
                 for (int i : DICE_VALUES) {
                     if (diceFrequencies.get(i) >= 3) {
-                        threeKindResult = i * 3;
-                        break;
+                        return i * 3;
                     }
                 }
-                result = threeKindResult;
-                break;
+                return 0;
 
             case FOUR_OF_A_KIND:
-
                 // score if four dice are the same
-                int fourKindResult = 0;
                 for (int i : DICE_VALUES) {
                     if (diceFrequencies.get(i) >= 4) {
-                        fourKindResult = i * 4;
-                        break;
+                        return i * 4;
                     }
                 }
-                result = fourKindResult;
-                break;
+                return 0;
 
             case SMALL_STRAIGHT:
-
                 // score if dice contains 1,2,3,4,5
                 int smallStraightResult = 0;
                 long count = 0L;

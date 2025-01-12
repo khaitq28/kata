@@ -73,8 +73,7 @@ public class Yatzy1 {
         return 0;
     }
 
-    public static int two_pair(int... args)
-    {
+    public static int two_pair(int... args) {
         int[] counts = new int[6];
         for (int arg : args) {
             int index = arg-1;
@@ -82,10 +81,10 @@ public class Yatzy1 {
         }
         int n = 0;
         int score = 0;
-        for (int i = 0; i < 6; i += 1)
-            if (counts[6-i-1] >= 2) {
+        for (int i = counts.length -1; i >= 0; i--)
+            if (counts[i] >= 2) {
                 n++;
-                score += (6-i);
+                score += (i + 1);
             }        
         if (n == 2)
             return score * 2;
