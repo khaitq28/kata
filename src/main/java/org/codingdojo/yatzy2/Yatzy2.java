@@ -17,7 +17,7 @@ public class Yatzy2 implements YatzyCalculator {
         return Stream.of(YatzyCategory.values()).map(Enum::toString).toList();
     }
 
-    private int calcul(HashMap<Integer, Integer> diceFrequencies, int frequency) {
+    private int highestScoreOfFrequency(HashMap<Integer, Integer> diceFrequencies, int frequency) {
         for (int i : DICE_VALUES) {
             if (diceFrequencies.getOrDefault(i, Integer.MIN_VALUE) >= frequency) {
                 return i * frequency;
@@ -26,7 +26,7 @@ public class Yatzy2 implements YatzyCalculator {
         return 0;
     }
 
-    private int sumItemsWithFre(HashMap<Integer, Integer> diceFrequencies, int value) {
+    private int sumItemsWithFrequency(HashMap<Integer, Integer> diceFrequencies, int value) {
         return  diceFrequencies.getOrDefault(value,0) * value;
     }
     @Override
@@ -51,32 +51,33 @@ public class Yatzy2 implements YatzyCalculator {
                 return (diceFrequencies.containsValue(5)) ? 50: 0;
             case ONES:
                 // sum all the ones
-                return sumItemsWithFre(diceFrequencies, 1);
+                return sumItemsWithFrequency(diceFrequencies, 1);
             case TWOS:
                 // sum all the twos
-                return sumItemsWithFre(diceFrequencies, 2);
+                return sumItemsWithFrequency(diceFrequencies, 2);
             case THREES:
                 // sum all the threes
-                return sumItemsWithFre(diceFrequencies, 3);
+                return sumItemsWithFrequency(diceFrequencies, 3);
             case FOURS:
                 // sum all the fours
-                return sumItemsWithFre(diceFrequencies, 4);
+                return sumItemsWithFrequency(diceFrequencies, 4);
             case FIVES:
                 // sum all the fives
-                return sumItemsWithFre(diceFrequencies, 5);
+                return sumItemsWithFrequency(diceFrequencies, 5);
             case SIXES:
                 // sum all the sixes
-                return sumItemsWithFre(diceFrequencies, 6);
+                return sumItemsWithFrequency(diceFrequencies, 6);
             case PAIR:
                 // score pair if two dice are the same
                 // score highest pair if there is more than one
-                return calcul(diceFrequencies, 2);
+                return highestScoreOfFrequency(diceFrequencies, 2);
             case THREE_OF_A_KIND:
                 // score if three dice are the same
-                return calcul(diceFrequencies, 3);
+                return highestScoreOfFrequency(diceFrequencies, 3);
             case FOUR_OF_A_KIND:
                 // score if four dice are the same
-                return calcul(diceFrequencies, 4);
+                return highestScoreOfFrequency(diceFrequencies, 4);
+
             case SMALL_STRAIGHT:
                 // score if dice contains 1,2,3,4,5
                 int smallStraightResult = 0;
@@ -95,7 +96,6 @@ public class Yatzy2 implements YatzyCalculator {
                 break;
 
             case LARGE_STRAIGHT:
-
                 // score if dice contains 2,3,4,5,6
                 int largeStraightResult = 0;
                 long straightCount = 0L;
