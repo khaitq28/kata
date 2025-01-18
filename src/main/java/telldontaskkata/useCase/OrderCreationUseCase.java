@@ -28,7 +28,6 @@ public class OrderCreationUseCase {
             final OrderItem orderItem = new OrderItem(product, itemRequest.getQuantity());
             order.addOrderItem(orderItem);
         }
-
         orderRepository.save(order);
     }
 }

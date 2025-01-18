@@ -10,16 +10,10 @@ public class OrderApprovalUseCase {
     private final OrderRepository orderRepository;
 
     public void run(OrderApprovalRequest request) {
-
         final Order order = orderRepository.getById(request.getOrderId()).orElseThrow(OrderNotFoundException::new);
-
-        if (order.isShipped()) {
-            throw new ShippedOrdersCannotBeChangedException();
-        }
-        if (order.isRejected()) {
-            throw new RejectedOrderCannotBeApprovedException();
-        }
+        order.validateToApproval();
         order.setStatus(OrderStatus.APPROVED);
         orderRepository.save(order);
     }
+
 }

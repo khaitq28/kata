@@ -40,7 +40,7 @@ class OrderCreationUseCaseTest {
     private final OrderCreationUseCase useCase = new OrderCreationUseCase(orderRepository, productCatalog);
 
     @Test
-    void sellMultipleItems() throws Exception {
+    void sellMultipleItems() {
         SellItemRequest saladRequest = new SellItemRequest();
         saladRequest.setProductName("salad");
         saladRequest.setQuantity(2);
@@ -50,9 +50,8 @@ class OrderCreationUseCaseTest {
         tomatoRequest.setQuantity(3);
 
         final SellItemsRequest request = new SellItemsRequest();
-        request.setRequests(new ArrayList<>());
-        request.getRequests().add(saladRequest);
-        request.getRequests().add(tomatoRequest);
+        request.addItem(saladRequest);
+        request.addItem(tomatoRequest);
 
         useCase.run(request);
 

@@ -17,8 +17,7 @@ public class Product {
 
     public BigDecimal getUnitaryTax() {
         return  getPrice()
-                .divide(valueOf(100))
-                .multiply(getCategory().getTaxPercentage())
+                .multiply(getCategory().getTaxPercentage().divide(valueOf(100)))
                 .setScale(2, HALF_UP);
     }
 
