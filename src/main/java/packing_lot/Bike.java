@@ -8,4 +8,10 @@ public class Bike extends Vehicle {
     public int getNumberOfSpotNeeded() {
         return 1;
     }
+
+    @Override
+    public double getBasePricePerHour() {
+        return 0;
+    }
+
 }

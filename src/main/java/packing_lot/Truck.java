@@ -6,6 +6,10 @@ public class Truck extends Vehicle {
     }
     @Override
     public int getNumberOfSpotNeeded() {
-        return 4;
+        return this.type.getSlotNeed();
+    }
+    @Override
+    public double getBasePricePerHour() {
+        return this.type.getPricePerHour();
     }
 }

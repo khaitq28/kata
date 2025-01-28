@@ -6,4 +6,6 @@ public abstract class Vehicle {
         return type;
     }
     public abstract int getNumberOfSpotNeeded();
+
+    public abstract double getBasePricePerHour();
 }

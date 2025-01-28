@@ -8,4 +8,9 @@ public class Car extends Vehicle {
     public int getNumberOfSpotNeeded() {
         return 2;
     }
+
+    @Override
+    public double getBasePricePerHour() {
+        return 5;
+    }
 }
