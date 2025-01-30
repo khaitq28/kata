@@ -1,9 +1,15 @@
 package packing_lot;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
+
+@Getter
+@Setter
 public class Ticket {
     private String id;
     private final Vehicle vehicle;
@@ -16,10 +22,6 @@ public class Ticket {
         this.start = LocalDateTime.now();
     }
 
-    public Vehicle getVehicle() {
-        return this.vehicle;
-    }
-
     public void validate() {
         if (this.end != null) {
             System.out.println("Ticket has been validated");
@@ -27,9 +29,10 @@ public class Ticket {
         }
         this.end = LocalDateTime.now();
     }
-    public double getFee() {
+
+    public double getTicketFee() {
         if (this.end == null) throw new RuntimeException("Need to be Validated");
-        long durationInHour = ChronoUnit.HOURS.between(start, end);
-        return durationInHour * this.vehicle.getBasePricePerHour();
+        long durationInHour = ChronoUnit.MINUTES.between(start, end);
+        return Math.ceil(durationInHour * this.vehicle.getBasePricePerHour() / 60);
     }
 }

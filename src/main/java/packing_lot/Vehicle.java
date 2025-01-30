@@ -5,7 +5,11 @@ public abstract class Vehicle {
     public VehicleType getType() {
         return type;
     }
-    public abstract int getNumberOfSpotNeeded();
+    public int getNumberOfSpotNeeded() {
+        return type.getSlotNeed();
+    }
 
-    public abstract double getBasePricePerHour();
+    public double getBasePricePerHour() {
+        return type.getPricePerHour();
+    }
 }
