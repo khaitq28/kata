@@ -30,9 +30,9 @@ class TicketTest {
     @ValueSource(ints = {15,30,45,60,100,240,500,4568,1000})
     void getTicketFee(int durationInMinute) {
         Vehicle vehicle = Mockito.mock(Vehicle.class);
-        when(vehicle.getBasePricePerHour()).thenReturn(10d);
+        when(vehicle.getPricePerHour()).thenReturn(10d);
         Ticket ticket = new Ticket(vehicle);
         ticket.setEnd(ticket.getStart().plusMinutes(durationInMinute));
-        assertEquals(Math.ceil(vehicle.getBasePricePerHour()/ 60 * durationInMinute) ,ticket.getTicketFee());
+        assertEquals(Math.ceil(vehicle.getPricePerHour()/ 60 * durationInMinute) ,ticket.getTicketFee());
     }
 }

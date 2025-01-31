@@ -6,10 +6,10 @@ public abstract class Vehicle {
         return type;
     }
     public int getNumberOfSpotNeeded() {
-        return type.getSlotNeed();
+        return getType().getSlotNeed();
     }
 
-    public double getBasePricePerHour() {
-        return type.getPricePerHour();
+    public double getPricePerHour() {
+        return getType().getPricePerHour();
     }
 }

@@ -33,6 +33,6 @@ public class Ticket {
     public double getTicketFee() {
         if (this.end == null) throw new RuntimeException("Need to be Validated");
         long durationInHour = ChronoUnit.MINUTES.between(start, end);
-        return Math.ceil(durationInHour * this.vehicle.getBasePricePerHour() / 60);
+        return Math.ceil(durationInHour * this.vehicle.getPricePerHour() / 60);
     }
 }
