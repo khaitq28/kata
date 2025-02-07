@@ -18,4 +18,12 @@ public enum VehicleType {
         return pricePerHour;
     }
 
+    public String getTypeName() {
+        return switch (this) {
+            case CAR -> "Type Car";
+            case TRUCK -> "Type truck";
+            case BIKE -> "Bike";
+        };
+    }
+
 }

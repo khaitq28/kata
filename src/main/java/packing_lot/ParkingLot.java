@@ -10,7 +10,7 @@ public class ParkingLot {
     }
 
     public Ticket parkVehicle(Vehicle vehicle) {
-        if (availableSpot < vehicle.getNumberOfSpotNeeded())
+        if (getAvailableSpot() < vehicle.getNumberOfSpotNeeded())
             throw new RuntimeException("Impossible to park this vehicle");
 
         for (int i = 0; i < spots.length; i++) {
@@ -43,7 +43,7 @@ public class ParkingLot {
     }
 
     public int getAvailableSpot() {
-        return this.availableSpot;
+        return availableSpot;
     }
 
 }

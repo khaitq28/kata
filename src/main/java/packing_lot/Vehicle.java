@@ -1,6 +1,6 @@
 package packing_lot;
 
-public abstract class Vehicle {
+public sealed abstract class Vehicle permits Car, Truck, Bike{
     protected VehicleType type;
     public VehicleType getType() {
         return type;
@@ -11,5 +11,9 @@ public abstract class Vehicle {
 
     public double getPricePerHour() {
         return getType().getPricePerHour();
+    }
+
+    public String getVehicleTypeName() {
+        return type.getTypeName();
     }
 }
