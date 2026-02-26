@@ -80,10 +80,10 @@ public class Item {
             return;
         }
         increaseQuality();
-        if (sellIn < 11) {
+        if (sellIn <= 10) {
             increaseQuality();
         }
-        if (sellIn < 6) {
+        if (sellIn <= 5) {
             increaseQuality();
         }
     }
