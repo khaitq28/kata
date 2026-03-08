@@ -44,29 +44,33 @@ public class Product {
         itemTotal = applyElectronicsDiscount(itemTotal, customerType);
         itemTotal = applyClothingDiscount(itemTotal, customerType, isHolidaySeason);
         itemTotal = applyFoodDiscount(itemTotal, customerType);
+        itemTotal = applyLoyaltyDiscount(itemTotal, customerType, loyaltyPoints);
+        itemTotal = applyBulkDiscount(itemTotal);
 
-        // Loyalty points discount
+        return itemTotal;
+    }
+
+    private double applyBulkDiscount(double itemTotal) {
+        if (this.quantity >= 20) {
+            return itemTotal * 0.95;
+        } else if (this.quantity >= 10) {
+            return itemTotal * 0.97;
+        }
+        return itemTotal;
+    }
+
+    private double applyLoyaltyDiscount(double itemTotal, String customerType, int loyaltyPoints) {
         if (loyaltyPoints >= 1000) {
             if (isVip(customerType)) {
-                itemTotal = itemTotal * 0.9;
+                return itemTotal * 0.9;
             } else if (isPremium(customerType)) {
-                itemTotal = itemTotal * 0.95;
+                return itemTotal * 0.95;
             } else {
-                itemTotal = itemTotal * 0.98;
+                return itemTotal * 0.98;
             }
-        } else if (loyaltyPoints >= 500) {
-            if (isPremium(customerType) || isVip(customerType)) {
-                itemTotal = itemTotal * 0.97;
-            }
+        } else if (loyaltyPoints >= 500 && (isPremium(customerType) || isVip(customerType))) {
+            return itemTotal * 0.97;
         }
-
-        // Bulk discount
-        if (this.quantity >= 20) {
-            itemTotal = itemTotal * 0.95;
-        } else if (this.quantity >= 10) {
-            itemTotal = itemTotal * 0.97;
-        }
-
         return itemTotal;
     }
 
