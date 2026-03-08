@@ -19,48 +19,31 @@ public class Product {
     }
 
 
+    private double getBaseTotal() {
+        return this.price * this.quantity;
+    }
+
+    private double applyElectronicsDiscount(double itemTotal, String customerType){
+        if (!isElectronics()) {
+            return itemTotal;
+        }
+        if (isPremium(customerType)) {
+            return itemTotal * 0.9;
+        }
+        if (isVip(customerType)) {
+            return itemTotal * 0.85;
+        }
+        itemTotal = itemTotal * 0.95;
+        return itemTotal;
+    }
+
     double getTotal(String customerType, boolean isHolidaySeason, int loyaltyPoints) {
-        double itemTotal = this.price * this.quantity;
 
-        // Electronics discount
-        if (isElectronics()) {
-            if (isPremium(customerType)) {
-                itemTotal = itemTotal * 0.9;
-            } else if (isVip(customerType)) {
-                itemTotal = itemTotal * 0.85;
-            } else {
-                itemTotal = itemTotal * 0.95;
-            }
-        }
+        double itemTotal = getBaseTotal();
 
-        // Clothing discount
-        if (isClothing()) {
-            if (isHolidaySeason) {
-                if (isPremium(customerType)) {
-                    itemTotal = itemTotal * 0.8;
-                } else if (isVip(customerType)) {
-                    itemTotal = itemTotal * 0.75;
-                } else {
-                    itemTotal = itemTotal * 0.85;
-                }
-            } else {
-                if (isPremium(customerType)) {
-                    itemTotal = itemTotal * 0.9;
-                } else if (isVip(customerType)) {
-                    itemTotal = itemTotal * 0.85;
-                }
-            }
-        }
-
-        // Food discount
-        if (isFood()) {
-            if (this.quantity >= 10) {
-                itemTotal = itemTotal * 0.9;
-            }
-            if (isVip(customerType)) {
-                itemTotal = itemTotal * 0.95;
-            }
-        }
+        itemTotal = applyElectronicsDiscount(itemTotal, customerType);
+        itemTotal = applyClothingDiscount(itemTotal, customerType, isHolidaySeason);
+        itemTotal = applyFoodDiscount(itemTotal, customerType);
 
         // Loyalty points discount
         if (loyaltyPoints >= 1000) {
@@ -87,6 +70,59 @@ public class Product {
         return itemTotal;
     }
 
+    private double applyFoodDiscount(double itemTotal, String customerType) {
+        if (!isFood()) {
+            return itemTotal;
+        }
+        if (this.quantity >= 10) {
+            itemTotal = itemTotal * 0.9;
+        }
+        if (isVip(customerType)) {
+            itemTotal = itemTotal * 0.95;
+        }
+        return itemTotal;
+    }
+
+    private double applyClothingDiscount(double itemTotal, String customerType, boolean isHolidaySeason) {
+        if (!isClothing()) {
+            return itemTotal;
+        }
+        if (isHolidaySeason) {
+            if (isPremium(customerType)) {
+                return  itemTotal * 0.8;
+            } else if (isVip(customerType)) {
+                return itemTotal * 0.75;
+            } else {
+                return itemTotal * 0.85;
+            }
+        } else {
+            if (isPremium(customerType)) {
+                return itemTotal * 0.9;
+            } else if (isVip(customerType)) {
+                return itemTotal * 0.85;
+            }
+        }
+        return itemTotal;
+    }
+
+    public double getTax(String customerType) {
+        double itemTotal = getBaseTotal();
+        double taxRate = getTaxRate(customerType);
+        return itemTotal * taxRate;
+    }
+
+    private double getTaxRate(String customerType) {
+        if (isElectronics()) {
+            return 0.1;
+        } else if (isClothing()) {
+            return 0.08;
+        } else if (isFood()) {
+            return isVip(customerType) ? 0.05 : 0.1;
+        }
+        return 0.0;
+    }
+
+
     private boolean isFood() {
         return this.category.equals("Food");
     }
@@ -106,22 +142,5 @@ public class Product {
 
     private boolean isElectronics() {
         return this.category.equals("Electronics");
-    }
-
-    public double getTax(String customerType) {
-        double tax = 0.0;
-        double itemTotal = this.price * this.quantity;
-        if (isElectronics()) {
-            tax += itemTotal * 0.1;
-        } else if (isClothing()) {
-            tax += itemTotal * 0.08;
-        } else if (isFood()) {
-            if (isVip(customerType)) {
-                tax += itemTotal * 0.05;
-            } else {
-                tax += itemTotal * 0.1;
-            }
-        }
-        return tax;
     }
 }
