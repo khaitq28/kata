@@ -1,6 +1,5 @@
 package telldontaskkata.useCase;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 

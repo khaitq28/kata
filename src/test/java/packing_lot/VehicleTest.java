@@ -8,7 +8,8 @@ import static org.mockito.Mockito.when;
 
 class VehicleTest {
 
-    private Vehicle vehicle = Mockito.mock(Vehicle.class);
+    private Vehicle vehicle;
+
     @Test
     void getType() {
     }

@@ -5,10 +5,6 @@ import telldontaskkata.domain.Order;
 import telldontaskkata.domain.OrderStatus;
 import telldontaskkata.service.ShipmentService;
 
-import static telldontaskkata.domain.OrderStatus.CREATED;
-import static telldontaskkata.domain.OrderStatus.REJECTED;
-import static telldontaskkata.domain.OrderStatus.SHIPPED;
-
 public class OrderShipmentUseCase {
     private final OrderRepository orderRepository;
     private final ShipmentService shipmentService;
