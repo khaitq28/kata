@@ -1,5 +1,8 @@
 package packing_lot;
 
+import lombok.Getter;
+
+@Getter
 public enum VehicleType {
     CAR(2,5),
     TRUCK(4,10),
@@ -9,13 +12,6 @@ public enum VehicleType {
     VehicleType(int slotNeed, double pricePerHour) {
         this.pricePerHour = pricePerHour;
         this.slotNeed = slotNeed;
-    }
-    public int getSlotNeed() {
-        return slotNeed;
-    }
-
-    public double getPricePerHour() {
-        return pricePerHour;
     }
 
     public String getTypeName() {

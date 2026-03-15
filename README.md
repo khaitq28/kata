@@ -1,71 +1,461 @@
-Kata is amazing and best way to improve your coding, refactoring, design skills ! 
+# Kata Practice — Clean Code & Design Patterns in Java
 
-Here are some of my solutions to kata exercises, mostly from https://codingdojo.org, and https://kata-log.rocks/
+> Kata is the best way to sharpen your coding, refactoring, and design skills through deliberate practice.
 
-1. Movie Rental 
-https://codingdojo.org/kata/movie-rental/
+A curated collection of kata solutions demonstrating **clean code**, **OOP principles**, and **design patterns** in Java 17.
+Solutions come from [codingdojo.org](https://codingdojo.org), [kata-log.rocks](https://kata-log.rocks/), and custom exercises.
 
-2. Employee Report
-https://codingdojo.org/kata/Employee-Report/
+---
 
-3. Tennis Game:
-https://codingdojo.org/kata/Tennis/
-4. Social network
-5. Task List 
-6. Leap Year
-7. Manhattan Distance
-8. Trip Service
-9. Score keeper
-10. Tell Don't Ask Kata: https://kata-log.rocks/tell-dont-ask-kata
+## Table of Contents
 
-....
+- [Project Structure](#project-structure)
+- [Tech Stack](#tech-stack)
+- [How to Build & Run](#how-to-build--run)
+- [Kata Exercises](#kata-exercises)
+  - [Refactoring Katas](#refactoring-katas)
+  - [OOP / Design Katas](#oop--design-katas)
+  - [Algorithm Katas](#algorithm-katas)
+- [Design Patterns Index](#design-patterns-index)
+- [Testing Approaches](#testing-approaches)
 
-and some from https://kata-log.rocks/
+---
 
+## Project Structure
 
-### 2 kinds of exercises: 
-+ OOP/Kata code from scratch
-+ Refactoring from an unclean version
+```
+kata/
+├── src/
+│   ├── main/java/
+│   │   ├── movierental/           # Movie Rental refactoring kata
+│   │   ├── employee/              # Employee Report kata
+│   │   ├── tennis/                # Tennis Game kata (6 implementations)
+│   │   ├── social_network/        # Social Network kata
+│   │   ├── tasklist/              # Task List kata
+│   │   ├── leapyear/              # Leap Year kata
+│   │   ├── manhattanDistance/     # Manhattan Distance kata
+│   │   ├── tripservicekata/       # Trip Service kata
+│   │   ├── ScoreKeeper/           # Score Keeper kata
+│   │   ├── telldontaskkata/       # Tell Don't Ask kata
+│   │   ├── gildedrose/            # Gilded Rose refactoring kata
+│   │   ├── packing_lot/           # Parking Lot kata
+│   │   ├── PrimeFactors/          # Prime Factors kata
+│   │   ├── refactoring_a/         # Shopping Cart refactoring kata
+│   │   ├── product_export_refactoring/ # Product Export refactoring kata
+│   │   ├── Store/                 # Store kata
+│   │   ├── oop/                   # OOP exercises (Unix file search, rm -rf)
+│   │   └── org/codingdojo/        # Yatzy kata (3 implementations)
+│   └── test/java/                 # Mirror of main, one test class per kata
+└── pom.xml
+```
 
----------------------------
+---
 
-And some question for System design interview :
+## Tech Stack
 
-Here’s the list of the questions I asked previously related to **task scheduling**, **resource management**, **distributed systems**, **scalability**, memory-constrained algorithms, and **real-time processing**:
+| Tool | Purpose |
+|------|---------|
+| Java 17 | Language (sealed classes, switch expressions, records) |
+| Maven | Build & dependency management |
+| JUnit 5 | Unit testing |
+| JQwik | Property-based testing |
+| ApprovalTests | Approval / snapshot testing |
+| Lombok | Boilerplate reduction |
+| Apache Commons | Lang & Collections utilities |
+| Easy Random | Random test data generation |
 
-#### Task Scheduling and Resource Management
-1. **Design a task scheduler that executes tasks based on priority but prevents high-priority tasks from starving low-priority tasks.**
-2. **Implement a system that schedules tasks with different deadlines (real-time tasks). How would you ensure tasks are completed before their deadlines while managing system resources efficiently?**
-3. **How would you design a job scheduling system where jobs arrive continuously, but some jobs require more resources (e.g., CPU, memory) than others? Prioritize jobs based on available resources and fairness.**
-4. **Create a rate limiter to handle incoming API requests where some users can have higher request rates than others. How do you prevent abuse while ensuring fairness?**
-5. **Design a priority-based print job queue for a large organization. How do you ensure that lower-priority print jobs eventually get printed without being starved by higher-priority jobs?**
+---
 
-#### Memory-Constrained Algorithms
-6. **You are given a log file of 50GB on disk, but your program has only 2GB of RAM. Design an efficient algorithm to find the top 10 most frequent log entries.**
-7. **Given a dataset of 20 million records that doesn’t fit into memory, how would you efficiently sort the data? Explain the steps and how you manage the limited memory.**
-8. **Design an algorithm to merge 100 sorted files, each 1GB in size, using only 1GB of RAM. How would you efficiently combine these into a single sorted output?**
-9. **You have 100 million unique integers, but only 512MB of memory to work with. How would you sort them efficiently?**
-10. **You need to compute the median of a dataset that’s too large to fit into memory. How do you approach this problem with limited resources?**
+## How to Build & Run
 
-#### Distributed Systems and Scalability
-11. **Design a distributed email marketing system that sends personalized emails to millions of users. How do you handle failures, retries, and optimize the sending rate?**
-12. **Design a distributed log processing system that continuously processes and aggregates large volumes of log data from multiple servers. How do you handle limited memory on each processing node?**
-13. **How would you design a URL shortening service like bit.ly, which has to scale to billions of URLs, while ensuring short URL uniqueness and fast lookups?**
-14. **Imagine you are building a system to process large batches of orders in an e-commerce platform. Some orders are urgent, and others are normal. How do you design the system to ensure urgent orders are processed first, while normal orders are not indefinitely delayed?**
-15. **Design a load balancer that distributes incoming traffic to multiple backend servers. How would you handle scenarios where some servers are overloaded, while others are underutilized?**
+```bash
+# Compile
+mvn compile
 
-#### Disk I/O and External Memory Processing
-16. **You have a huge dataset of 100GB of transactions stored in a database. How would you efficiently calculate the total sum of these transactions if your program can only load 1GB into memory at a time?**
-17. **Design an algorithm that can find the largest 10 numbers in a dataset that’s much larger than your available memory (e.g., a 100GB file on disk with 1GB RAM).**
-18. **You have a 10TB log file on disk, but only 4GB of RAM. How would you efficiently find and remove duplicate log entries from the file?**
-19. **Design a system to sort terabytes of data distributed across multiple machines with limited memory on each machine. How do you optimize the network and disk I/O?**
-20. **How would you index a massive file stored on disk, where only a portion of the file can be loaded into memory at any given time? How do you ensure fast lookups with minimal memory usage?**
+# Run all tests
+mvn test
 
-#### Data Streaming and Real-Time Processing
-21. **How would you design a system that monitors real-time stock prices and generates alerts for certain conditions (e.g., when the price drops by 10%) with minimal delay?**
-22. **You need to process a continuous stream of sensor data, but the amount of data far exceeds your memory capacity. How do you design the system to process the stream and generate insights without losing any data?**
-23. **Imagine you’re tasked with designing a live leaderboard system that tracks the top 100 scores in a video game. The system must handle millions of incoming score updates per second with limited memory. How do you ensure real-time accuracy and scalability?**
-24. **Design a system to compute real-time analytics on social media posts (e.g., tracking the most trending hashtags in the last 10 minutes). The volume of posts exceeds your memory capacity. How do you approach this?**
-25. **You need to aggregate the average and max values from a continuous data stream, but the data far exceeds available memory. How would you design this system to ensure accurate results with limited resources?**
+# Run tests for a specific kata
+mvn test -Dtest="TennisGame1Test"
+```
 
-These questions test your ability to think about **scalability, resource management**, and **system optimization** when faced with real-world constraints.
+---
+
+## Kata Exercises
+
+### Refactoring Katas
+
+These start from unclean/legacy code and the goal is to refactor toward clean, readable, well-structured code.
+
+---
+
+#### 1. Movie Rental
+**Source:** https://codingdojo.org/kata/movie-rental/
+**Package:** `movierental/`
+
+Classic Martin Fowler refactoring example. Starts with a `Customer.statement()` god-method and refactors it into a clean, extensible design.
+
+**Key concepts:** Extract Method, Move Method, Replace Conditional with Polymorphism
+**Patterns:** Strategy (pricing), Enum (`PriceCode`)
+
+```
+movierental/
+├── Customer.java         # Customer with rental list
+├── Rental.java           # Rental record
+├── Movie.java            # Movie with price code
+├── PriceCode.java        # Enum: REGULAR, NEW_RELEASE, CHILDREN
+└── price/
+    ├── Price.java        # Abstract pricing strategy
+    ├── RegularPrice.java
+    ├── NewReleasePrice.java
+    └── ChildrenPrice.java
+```
+
+---
+
+#### 2. Employee Report
+**Source:** https://codingdojo.org/kata/Employee-Report/
+**Package:** `employee/`
+
+Filter and report on a list of employees. Practice applying the Filter/Predicate pattern with sorting.
+
+**Key concepts:** Filtering, Sorting, Separation of concerns
+**Patterns:** Strategy (`EmployeeFilter`), Predicate, Template Method
+
+```
+employee/
+├── Employee.java
+├── Shop.java              # Employee container with filter/sort logic
+├── EmployeeFilter.java    # Filter interface
+├── AdultFilter.java
+├── SeniorFilter.java
+├── Reporter.java          # Report interface
+└── EmployeeReporter.java
+```
+
+---
+
+#### 3. Gilded Rose
+**Source:** https://kata-log.rocks/gilded-rose-kata
+**Package:** `gildedrose/`
+
+Famous refactoring kata. Starts with a mass of nested conditionals and refactors to clean polymorphic rules per item type.
+
+**Key concepts:** Replace Conditional with Polymorphism, Extract Class, Open/Closed Principle
+**Patterns:** Strategy (per-item update rules)
+
+**Special items handled:** Aged Brie, Backstage Passes, Sulfuras, Conjured items
+
+---
+
+#### 4. Tell Don't Ask
+**Source:** https://kata-log.rocks/tell-dont-ask-kata
+**Package:** `telldontaskkata/`
+
+Full order management system. Demonstrates the "Tell Don't Ask" principle — objects should tell other objects what to do rather than ask for data and decide externally.
+
+**Key concepts:** Tell Don't Ask, Domain-Driven Design, Use Case pattern, rich domain models
+**Patterns:** Repository, Use Case, State (order lifecycle), custom exceptions
+
+```
+telldontaskkata/
+├── domain/
+│   ├── Order.java            # Rich domain object with state validation
+│   ├── OrderItem.java
+│   ├── Product.java
+│   ├── Category.java
+│   └── OrderStatus.java      # Enum: CREATED, APPROVED, REJECTED, SHIPPED
+├── repository/
+│   ├── OrderRepository.java  # Interface
+│   └── ProductCatalog.java   # Interface
+├── service/
+│   └── ShipmentService.java
+└── useCase/
+    ├── OrderCreationUseCase.java
+    ├── OrderApprovalUseCase.java
+    ├── OrderRejectionUseCase.java
+    └── OrderShipmentUseCase.java
+```
+
+**Order state machine:**
+```
+CREATED → APPROVED → SHIPPED
+        ↘ REJECTED
+```
+
+---
+
+#### 5. Trip Service
+**Source:** https://kata-log.rocks/trip-service-kata
+**Package:** `tripservicekata/`
+
+Refactoring kata focused on breaking dependencies on singletons and static calls to make code testable.
+
+**Key concepts:** Dependency breaking, Seam pattern, protected method override for testing
+**Patterns:** Builder (`UserBuilder`), DAO, custom exceptions
+
+---
+
+#### 6. Refactoring A — Shopping Cart
+**Package:** `refactoring_a/`
+
+Refactor a monolithic discount/tax calculation into a clean, extensible design.
+
+**Key concepts:** Extract strategy, Separate policy from context
+**Patterns:** Strategy (discount policies, tax policies), Context, Enum (`Category`, `CustomerType`)
+
+```
+refactoring_a/
+├── Product.java
+├── ShoppingCart.java
+├── DiscountPolicy.java        # Interface
+├── TaxPolicy.java             # Interface
+├── DiscountContext.java
+├── BulkDiscountPolicy.java
+├── LoyaltyDiscountPolicy.java
+├── ClothingDiscountPolicy.java
+└── FoodDiscountPolicy.java
+```
+
+---
+
+#### 7. Product Export Refactoring
+**Package:** `product_export_refactoring/`
+
+Refactor static utility-heavy export logic into clean, testable domain objects.
+
+**Key concepts:** Remove static dependencies, encapsulate export logic
+**Patterns:** Rich domain objects, Exporter pattern
+
+---
+
+### OOP / Design Katas
+
+These start from scratch, focusing on clean design and applying patterns correctly.
+
+---
+
+#### 8. Tennis Game
+**Source:** https://codingdojo.org/kata/Tennis/
+**Package:** `tennis/`
+
+Six different implementations of the same Tennis scoring problem, each demonstrating a different design approach. Great for comparing tradeoffs.
+
+| Implementation | Approach |
+|---|---|
+| `game1/` | State Pattern with polymorphic score types |
+| `game2/` | Statement Pattern |
+| `game3/` | Functional / lambda approach |
+| `game4/` | Minimal procedural |
+| `game5/` | Data-driven |
+| `game6/` | Table-based scoring |
+
+**Patterns (game1):** State, Template Method, Predicate
+```
+tennis/game1/
+├── TennisGame1.java       # Orchestrator
+├── Player.java
+├── Score.java             # Abstract base
+├── NormalScore.java
+├── DeuceScore.java
+├── AdvantageScore.java
+└── WinScore.java
+```
+
+---
+
+#### 9. Social Network
+**Package:** `social_network/`
+
+Full layered architecture for a simplified Twitter-like social network.
+
+**Key concepts:** Layered architecture, Dependency Inversion, Repository pattern
+**Patterns:** Repository, Service Layer, DTO, Dependency Injection
+
+```
+social_network/
+├── domain/          # User, Post, Follow, TimeUtils
+├── repository/      # Interfaces: UserRepository, PostRepository, FollowRepository
+├── service/         # Interfaces + Impls: UserService, PostService, WallService
+├── controller/      # UserController, PostController, WallController
+├── dto/             # PostRequestDto, WallResponseDto, ...
+└── infra/database/  # In-memory repository implementations
+```
+
+**Features:** Post to timeline, follow users, view wall (aggregated feed from followed users)
+
+---
+
+#### 10. Task List
+**Source:** https://codingdojo.org/kata/task-list/
+**Package:** `tasklist/refact/`
+
+CLI task manager. Refactored from a monolithic switch statement to the Command pattern.
+
+**Key concepts:** Command pattern, Factory with switch expressions, Clean CLI parsing
+**Patterns:** Command, Factory, Enum (`CommandType`)
+
+**Supported commands:** `show`, `add project`, `add task`, `check`, `uncheck`, `help`, `quit`
+
+```
+tasklist/refact/
+├── Command.java          # Interface
+├── CommandFactory.java   # Factory with switch expression
+├── CommandType.java      # Enum
+├── AddProjectCommand.java
+├── AddTaskCommand.java
+├── CheckCommand.java
+├── ShowCommand.java
+└── ...
+```
+
+---
+
+#### 11. Parking Lot
+**Package:** `packing_lot/`
+
+Design a parking lot system from scratch supporting multiple vehicle types with dynamic slot allocation and pricing.
+
+**Key concepts:** Sealed classes (Java 17), Enum with data, rich domain model
+**Patterns:** Sealed hierarchy, Enum (`VehicleType` with slot count and price per hour)
+
+```
+packing_lot/
+├── Vehicle.java       # Sealed abstract class
+├── Car.java           # permits Vehicle
+├── Truck.java
+├── Bike.java
+├── VehicleType.java   # Enum: CAR, TRUCK, BIKE
+├── ParkingLot.java    # Lot management + slot allocation
+└── Ticket.java        # Issued on entry, used for checkout
+```
+
+---
+
+#### 12. Yatzy
+**Source:** https://kata-log.rocks/yatzy-refactoring-kata
+**Package:** `org/codingdojo/`
+
+Three progressively refined implementations of the Yatzy dice game scorer.
+
+| Version | Approach |
+|---|---|
+| `yatzy1/` | Procedural baseline |
+| `yatzy2/` | Intermediate, some extraction |
+| `yatzy3/` | Full Strategy + Factory pattern |
+
+**Yatzy3 patterns:** Strategy (`YatzyPointsScorer`), Factory (`CategoryScorer`), Enum (`YatzyCategory`)
+
+```
+yatzy3/
+├── YatzyPointsScorer.java      # Scorer interface
+├── CategoryScorer.java         # Factory
+├── NumberScorer.java
+├── RepeatedCountScorer.java
+├── FullHouseScorer.java
+├── StraightScorer.java
+├── TwoPairsScorer.java
+└── ChanceScorer.java
+```
+
+---
+
+#### 13. Unix File Search (OOP)
+**Package:** `oop/unixFileSearch/`
+
+OOP design for a `find`-like file search API supporting composable filters.
+
+**Key concepts:** Composite pattern, recursive tree traversal, filter composition
+**Patterns:** Template Method (`AbstractFile`), Composite (`GroupFilter`), Strategy (individual filters)
+
+```
+oop/unixFileSearch/
+├── AbstractFile.java        # Template method base
+├── File.java
+├── Directory.java           # Recursive search
+├── SearchFileApi.java
+└── filter/
+    ├── FileFilter.java      # Interface
+    ├── GroupFilter.java     # Composite: AND / OR grouping
+    ├── ExtensionFilter.java
+    ├── FileNameFilter.java
+    ├── FileSizeFilter.java
+    └── FilterOperator.java  # Enum: EQUAL, GREATER_THAN, LESS_THAN, ...
+```
+
+---
+
+#### 14. Store
+**Package:** `Store/`
+
+Inventory management kata with shelf categorization and a fluent builder.
+
+**Key concepts:** Builder pattern, Template Method, Enum-based categorization
+**Patterns:** Builder, Template Method, Enum (`ShelveType`)
+
+---
+
+### Algorithm Katas
+
+Simple, focused algorithmic exercises — great warm-ups.
+
+| Kata | Package | Description |
+|------|---------|-------------|
+| Leap Year | `leapyear/` | Determine if a year is a leap year using divisibility rules |
+| Prime Factors | `PrimeFactors/` | Return the prime factorization of an integer |
+| Manhattan Distance | `manhattanDistance/` | Calculate Manhattan distance between two points |
+| Score Keeper | `ScoreKeeper/` | Track and query scores |
+| Sum of Squares | `algo/` | Sum of squares calculation |
+
+---
+
+## Design Patterns Index
+
+| Pattern | Where Used |
+|---------|-----------|
+| **Strategy** | Movie Rental (pricing), Refactoring A (discounts/tax), Yatzy3 (scorers), Employee (filters) |
+| **State** | Tennis game1 (score states), Tell Don't Ask (order lifecycle) |
+| **Command** | Task List |
+| **Factory** | Task List (`CommandFactory`), Yatzy3 (`CategoryScorer`) |
+| **Template Method** | Tennis (score base), Unix File Search (`AbstractFile`), Store (`Food`) |
+| **Composite** | Unix File Search (`GroupFilter`) |
+| **Builder** | Trip Service (`UserBuilder`), Store (`Builder`) |
+| **Repository** | Tell Don't Ask, Social Network |
+| **Service Layer** | Social Network |
+| **DAO** | Trip Service |
+| **Use Case** | Tell Don't Ask |
+| **DTO** | Social Network |
+| **Sealed Classes** | Parking Lot (`Vehicle` hierarchy) — Java 17 |
+| **Enum with behavior** | Movie Rental (`PriceCode`), Parking Lot (`VehicleType`), Task List (`CommandType`) |
+| **Predicate** | Employee Report |
+
+---
+
+## Testing Approaches
+
+| Approach | Library | Used In |
+|----------|---------|---------|
+| Unit tests | JUnit 5 | All katas |
+| Property-based tests | JQwik | Yatzy, Tennis |
+| Approval tests | ApprovalTests | Gilded Rose |
+| Test doubles (manual mocks/stubs) | Plain Java | Tell Don't Ask (`doubles/`) |
+| Random test data | Easy Random | Various |
+
+---
+
+## Two Kinds of Exercises
+
+| Type | Goal |
+|------|------|
+| **OOP / Kata from scratch** | Design clean solutions applying patterns and principles from the start |
+| **Refactoring from unclean code** | Start with working but messy code and iteratively improve structure, readability, and testability |
+
+---
+
+## Resources
+
+- [codingdojo.org](https://codingdojo.org) — Kata descriptions and community solutions
+- [kata-log.rocks](https://kata-log.rocks/) — Curated kata catalog with difficulty ratings
+- *Refactoring* — Martin Fowler
+- *Clean Code* — Robert C. Martin
+- *Head First Design Patterns* — Freeman & Freeman
