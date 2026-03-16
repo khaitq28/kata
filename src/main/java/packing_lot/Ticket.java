@@ -13,20 +13,20 @@ import java.util.UUID;
 public class Ticket {
     private String id;
     private final Vehicle vehicle;
+    private final int spotStart;
     private final LocalDateTime start;
     private LocalDateTime end;
 
-    public Ticket(Vehicle vehicle) {
+    public Ticket(Vehicle vehicle, int spotStart) {
         this.vehicle = vehicle;
+        this.spotStart = spotStart;
         this.id = UUID.randomUUID().toString();
         this.start = LocalDateTime.now();
     }
 
-    public void validate() {
-        if (this.end != null) {
-            System.out.println("Ticket has been validated");
-            return;
-        }
+    public void checkout() {
+        if (this.end != null)
+            throw new IllegalStateException("Ticket already checked out");
         this.end = LocalDateTime.now();
     }
 
