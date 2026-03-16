@@ -139,12 +139,29 @@ employee/
 **Source:** https://kata-log.rocks/gilded-rose-kata
 **Package:** `gildedrose/`
 
-Famous refactoring kata. Starts with a mass of nested conditionals and refactors to clean polymorphic rules per item type.
+Famous refactoring kata. The goal: refactor a god-object `Item` that mixes data and update logic for all item types into a clean, extensible design where adding a new item type requires zero changes to existing classes.
 
-**Key concepts:** Replace Conditional with Polymorphism, Extract Class, Open/Closed Principle
-**Patterns:** Strategy (per-item update rules)
+**Key concepts:** Replace Conditional with Polymorphism, Open/Closed Principle, Single Responsibility
+**Patterns:** Strategy (`ItemUpdater`), Factory (`ItemUpdaterFactory`)
 
-**Special items handled:** Aged Brie, Backstage Passes, Sulfuras, Conjured items
+```
+gildedrose/
+├── Item.java                 # Pure data class with package-private mutation helpers
+├── ItemUpdater.java          # Strategy interface
+├── NormalItemUpdater.java
+├── AgedBrieUpdater.java
+├── BackstagePassUpdater.java
+├── SulfurasUpdater.java      # No-op: legendary item never changes
+├── ConjuredItemUpdater.java  # Degrades 2x as fast as normal
+├── ItemUpdaterFactory.java   # Picks the right strategy by item name
+└── GildedRose.java           # Iterates items, delegates to factory
+```
+
+**Item types handled:** Normal, Aged Brie, Backstage Passes, Sulfuras, Conjured Mana Cake
+
+**Before → After:**
+- Before: `Item` contained nested conditionals for every item type — adding "Conjured" meant modifying `Item`
+- After: each item type is an isolated class; adding a new type = one new class + one line in the factory
 
 ---
 
@@ -413,7 +430,7 @@ Simple, focused algorithmic exercises — great warm-ups.
 
 | Pattern | Where Used |
 |---------|-----------|
-| **Strategy** | Movie Rental (pricing), Refactoring A (discounts/tax), Yatzy3 (scorers), Employee (filters) |
+| **Strategy** | Movie Rental (pricing), Gilded Rose (`ItemUpdater` per item type), Refactoring A (discounts/tax), Yatzy3 (scorers), Employee (filters) |
 | **State** | Tennis game1 (score states), Tell Don't Ask (order lifecycle) |
 | **Command** | Task List |
 | **Factory** | Task List (`CommandFactory`), Yatzy3 (`CategoryScorer`) |
