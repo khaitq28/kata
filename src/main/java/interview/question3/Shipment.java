@@ -7,7 +7,7 @@ public class Shipment {
 
     public void setCarrier(String carrier) { this.carrier = carrier; }
 
-    private void setPrice(double price) { this.price = price; }
+    public void setPrice(double price) { this.price = price; }
 
     public void processUsShipment(double price) {
         setCarrier("UPS");
