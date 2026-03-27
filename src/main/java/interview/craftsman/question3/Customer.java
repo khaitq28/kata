@@ -1,4 +1,4 @@
-package interview.question3;
+package interview.craftsman.question3;
 
 public class Customer {
     private String name;

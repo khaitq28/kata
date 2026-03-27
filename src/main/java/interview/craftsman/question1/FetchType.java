@@ -1,4 +1,4 @@
-package interview.question1;
+package interview.craftsman.question1;
 
 /**
  * Replaces primitive int type code — eliminates Primitive Obsession smell.

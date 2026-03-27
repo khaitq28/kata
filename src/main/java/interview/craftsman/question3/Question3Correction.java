@@ -1,4 +1,4 @@
-package interview.question3;
+package interview.craftsman.question3;
 
 /**
  * INTERVIEW QUESTION 3 — Correction placeholder.

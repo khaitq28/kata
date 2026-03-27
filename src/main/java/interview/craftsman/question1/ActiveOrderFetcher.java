@@ -1,4 +1,4 @@
-package interview.question1;
+package interview.craftsman.question1;
 
 import java.math.BigDecimal;
 import java.util.List;
