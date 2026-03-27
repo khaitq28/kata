@@ -1,4 +1,4 @@
-package interview.question4;
+package interview.craftsman.question4;
 
 /**
  * INTERVIEW QUESTION 4 — Original (smelly) code.
