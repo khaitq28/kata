@@ -2,6 +2,8 @@ package order_processor;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+
 @Getter
 public enum PaymentMethod {
     CREDIT_CARD(0.1),
@@ -15,10 +17,9 @@ public enum PaymentMethod {
     }
 
     public static PaymentMethod fromString(String paymentMethod) {
-        for (PaymentMethod pm : PaymentMethod.values()) {
-            if (pm.name().equals(paymentMethod)) return pm;
-        }
-        return null;
+        return Arrays.stream(PaymentMethod.values())
+                .filter(e -> e.name().equals(paymentMethod))
+                .findFirst().orElseThrow(() -> new IllegalArgumentException("Unknown payment method: " + paymentMethod));
     }
 
     public  String getConfirmation(double total) {

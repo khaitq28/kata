@@ -1,5 +1,7 @@
 package order_processor;
 
+import java.util.Arrays;
+
 public enum Item {
 
     BOOK(12.0),
@@ -21,5 +23,9 @@ public enum Item {
             if (i.name().equals(item)) return i;
         }
         return null;
+    }
+
+    public static Item fromPrice(double price) {
+        return Arrays.stream(Item.values()).filter(e -> e.getPrice() == price).findFirst().orElse(null);
     }
 }
