@@ -7,10 +7,12 @@ public class Sqrt {
         System.out.println("proximateSqrt(26) = " + proximateSqrt(26));
         System.out.println("proximateSqrt(37) = " + proximateSqrt(37));
 
-        System.out.println("sqrt(0.225, 0.01) = " +  sqrt(0.45, 0.001));
-        System.out.println("sqrt(29,0.0001) = " + sqrt(30, 0.0001));
-
+        System.out.println("sqrt(0.45, 0.01) = " +  sqrt(0.45, 0.001));
+        System.out.println("sqrt(30,0.0001) = " + sqrt(30, 0.0001));
         System.out.println("sqrt(15, 0.0001) = " + sqrt(15, 0.0001));
+
+        System.out.println("cubeRoot(1000) = " + cubeRoot(1000));
+        System.out.println("cubeRoot(900) = " + cubeRoot(900));
     }
 
     private static double sqrt(double x, double eclipse) {
@@ -40,6 +42,23 @@ public class Sqrt {
             } else {
                 ret = mid;
                 l = mid+1;
+            }
+        }
+        return ret;
+    }
+
+    private static double cubeRoot(double d) {
+        // 1000 => 10
+        double ret = 1;
+        int l = 1; int r = (int)d;
+        while (l <= r) {
+            int m = l + (r - l)/2;
+            if (m * m * m == d) return m;
+            if (m * m * m < d) {
+                ret = m;
+                l = m + 1;
+            } else {
+                r = m -1;
             }
         }
         return ret;
