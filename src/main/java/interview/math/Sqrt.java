@@ -11,8 +11,8 @@ public class Sqrt {
         System.out.println("sqrt(30,0.0001) = " + sqrt(30, 0.0001));
         System.out.println("sqrt(15, 0.0001) = " + sqrt(15, 0.0001));
 
-        System.out.println("cubeRoot(1000) = " + cubeRoot(1000));
-        System.out.println("cubeRoot(900) = " + cubeRoot(900));
+        System.out.println("cubeRoot(1000) = " + cubeRoot(1000,3));
+        System.out.println("cubeRoot(900) = " + cubeRoot(700,2));
     }
 
     private static double sqrt(double x, double eclipse) {
@@ -47,14 +47,14 @@ public class Sqrt {
         return ret;
     }
 
-    private static double cubeRoot(double d) {
+    private static double cubeRoot(double d, int k) {
         // 1000 => 10
         double ret = 1;
         int l = 1; int r = (int)d;
         while (l <= r) {
             int m = l + (r - l)/2;
-            if (m * m * m == d) return m;
-            if (m * m * m < d) {
+            if (Math.pow(m, k) == d) return m;
+            if (Math.pow(m, k) < d) {
                 ret = m;
                 l = m + 1;
             } else {
